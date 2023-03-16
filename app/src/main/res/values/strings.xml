@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">AndroidERestaurant</string>
+    <string name="home_button1">Entrées</string>
+    <string name="home_button2">Plats</string>
+    <string name="home_button3">Desserts</string>
 </resources>
