@@ -3,7 +3,6 @@ package fr.isen.bernhard.androiderestaurant
 import Data.Dishe
 import adapter.DishesAdapter
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -21,11 +20,8 @@ class CategoryActivity: AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
-
-
-        val myDataset: Array<Dishe> = arrayOf( Dishe(),Dishe(),Dishe() )
-
+        //TODO liste des plats via API
+        val myDataset: Array<Dishe> = arrayOf( Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe() )
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = DishesAdapter(this, myDataset)
