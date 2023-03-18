@@ -1,9 +1,13 @@
 package fr.isen.bernhard.androiderestaurant
 
+import Data.Dishe
+import adapter.DishesAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.recyclerview.widget.RecyclerView
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -18,17 +22,35 @@ class HomeActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //Recupere l' @ de l' objet homeButton1
-        //val button: Button = findViewById(R.id.homeButton1)
-        //binding.homeButton1.setOnClickListener {
-         //   println("ROOOOOOOOOOOL")
-       // }
+        binding.homeButton1.setOnClickListener {
+            Log.i(tag, "button1 clicked")
+            val intent = Intent(this, CategoryActivity::class.java)
+            intent.putExtra("category", getString(R.string.home_button1))
+            this.startActivity(intent)
+        }
+
+        binding.homeButton2.setOnClickListener {
+            Log.i(tag, "button2 clicked")
+            val intent = Intent(this, CategoryActivity::class.java)
+            intent.putExtra("category", getString(R.string.home_button1))
+            this.startActivity(intent)
+        }
+
+        binding.homeButton3.setOnClickListener {
+            Log.i(tag, "button3 clicked")
+            val intent = Intent(this, CategoryActivity::class.java)
+            intent.putExtra("category", getString(R.string.home_button1))
+            this.startActivity(intent)
+        }
+
+
+
 
 
     }
 
      override fun onDestroy() {
          super.onDestroy()
-         Log.d(tag,"HomeActivity destroyed")
+         Log.d(tag,"$tag destroyed")
     }
 }
