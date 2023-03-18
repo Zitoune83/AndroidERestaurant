@@ -1,13 +1,9 @@
 package fr.isen.bernhard.androiderestaurant
 
-import Data.Dishe
-import adapter.DishesAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import androidx.recyclerview.widget.RecyclerView
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {

@@ -1,12 +1,12 @@
 package adapter;
 
-import Data.Dishe
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View;
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import model.Dishe
 import fr.isen.bernhard.androiderestaurant.R
 
 public class DishesAdapter(private val context: Context, private val dataDishes:Array<Dishe>):RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
@@ -31,7 +31,7 @@ public class DishesAdapter(private val context: Context, private val dataDishes:
         //Action sur chaque vue
         override fun onBindViewHolder(holder: DisheViewHolder, position: Int) {
 
-                val dishe = dataDishes
+                //val dishe = dataDishes
                 //holder.textView.text =  context.resources.getString(dishe.??)
                 holder.textView.text =  "Coucou"
         }
