@@ -29,18 +29,10 @@ class CategoryActivity: AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //TODO liste des plats via API
-        getDishesFromServer()
+        //Recuperation category
+        val type = intent?.extras?.getString("category")
 
-        val myDataset: Array<Dishe> = arrayOf( Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe(),Dishe() )
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.adapter = DishesAdapter(this, myDataset)
-
-        // Use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true)
-
+        getDishesFromServer( type.toString())
 
     }
 
@@ -49,40 +41,47 @@ class CategoryActivity: AppCompatActivity() {
         Log.d(tag,"$tag destroyed")
     }
 
+    fun getDishesFromServer( type: String){
 
-    fun getDishesFromServer() {
+        var dishes: ArrayList<Dishe> = arrayListOf()
 
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
         val url = "http://test.api.catering.bluecodegames.com/menu"
 
-        // Request a string response from the provided URL.
-
+        // Request a string response from the provided URL
         val body = JSONObject()
         body.put("id_shop","1")
+
         val stringRequest = JsonObjectRequest(
             Request.Method.POST, url, body,
             { response ->
 
                 val data = Gson().fromJson(response.toString(), DataSource::class.java)
-                println("The Winner is")
-                println(data )
-                println("END")
-                //val dishes = data.daya[0].item.map{ it.categNameFr: ? ""}.tolist() as ArrayList
-                //adapter.updateDishe(dishes)
 
+                dishes = fillListOfDishes(data,type)
+
+                val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+                recyclerView.adapter = DishesAdapter(this, dishes)
+
+                // Use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
+                recyclerView.setHasFixedSize(true)
             }, {
                     error ->
                 Log.e(tag, "That didn't work!")
             }
-
-
         )
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest)
-    }
 
+
+       // println("THjjjjjjjjjE")
+        //println(dishes.size)
+       // println("END")
+
+    }
 
     //Use for  parsing
     fun jsonToPrettyFormat(jsonString: String?): String? {
@@ -96,6 +95,35 @@ class CategoryActivity: AppCompatActivity() {
         return gson.toJson(json)
     }
 
+    //Titre/Photo/prix du plat
+    fun fillListOfDishes(dataSource: DataSource, type:String ): ArrayList<Dishe>{
 
+        val dishes: ArrayList<Dishe> = arrayListOf()
+
+        when (type){
+            "Entrées" -> for (currentDish in  dataSource.data[0].items) {
+                val dish : Dishe = Dishe( currentDish)
+                dishes.add(dish)
+                println("ET")
+                println(currentDish.prices)
+                println("ANDD")
+            }
+
+            "Plats" -> for (currentDish in  dataSource.data[1].items) {
+                val dish : Dishe = Dishe( currentDish)
+                dishes.add(dish)
+            }
+
+            "Desserts" -> for (currentDish in  dataSource.data[2].items) {
+                val dish : Dishe = Dishe( currentDish)
+                dishes.add(dish)
+            }
+
+        }
+        println("TEST HOLDER")
+        println(dishes)
+        println("THE EDNEEEE")
+    return dishes
+    }
 
 }

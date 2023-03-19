@@ -28,14 +28,14 @@ class HomeActivity : AppCompatActivity() {
         binding.homeButton2.setOnClickListener {
             Log.i(tag, "button2 clicked")
             val intent = Intent(this, CategoryActivity::class.java)
-            intent.putExtra("category", getString(R.string.home_button1))
+            intent.putExtra("category", getString(R.string.home_button2))
             this.startActivity(intent)
         }
 
         binding.homeButton3.setOnClickListener {
             Log.i(tag, "button3 clicked")
             val intent = Intent(this, CategoryActivity::class.java)
-            intent.putExtra("category", getString(R.string.home_button1))
+            intent.putExtra("category", getString(R.string.home_button3))
             this.startActivity(intent)
         }
 

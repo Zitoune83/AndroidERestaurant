@@ -4,15 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View;
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import model.Dishe
 import fr.isen.bernhard.androiderestaurant.R
 
-public class DishesAdapter(private val context: Context, private val dataDishes:Array<Dishe>):RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
+public class DishesAdapter(private val context: Context, private val dataDishes:ArrayList<Dishe>):RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
 
         class DisheViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-                val textView: TextView = view.findViewById(R.id.textViewDishe)
+                val textView: TextView = view.findViewById(R.id.textViewPrice)
+                val textButton : Button = view.findViewById(R.id.button_select_dish)
+                val imageView: ImageView = view.findViewById(R.id.imageView)
+
         }
 
 
@@ -31,12 +37,21 @@ public class DishesAdapter(private val context: Context, private val dataDishes:
         //Action sur chaque vue
         override fun onBindViewHolder(holder: DisheViewHolder, position: Int) {
 
+
+                //val dishes = dataDishes[position]
+                //holder.textView.text = context.resources.getString(Dishe)
                 //val dishe = dataDishes
                 //holder.textView.text =  context.resources.getString(dishe.??)
-                holder.textView.text =  "Coucou"
+                holder.textView.text =  dataDishes[position].disheItem.prices[0].price
+                holder.textButton.text = dataDishes[position].disheItem.nameFr
+                Picasso.get().load(dataDishes[position].disheItem.images[0]).fit().centerCrop().into(holder.imageView)
+
+                println("THjjjjjjjjjE")
+                println(dataDishes[position].disheItem.images[0])
+                println("END")
+
+
         }
-
-
 }
 
 
@@ -59,7 +74,7 @@ class ViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
         init {
         // Define click listener for the ViewHolder's View
-        textView = view.findViewById(R.id.textViewDishe)
+        textView = view.findViewById(R.id.textViewPrice)
         }
         }
 
