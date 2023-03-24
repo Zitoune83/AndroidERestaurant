@@ -1,7 +1,5 @@
 package fr.isen.bernhard.androiderestaurant.adapter;
 
-import android.content.Context
-import android.graphics.Color
 import android.graphics.Color.argb
 import android.view.LayoutInflater
 import android.view.View;
@@ -9,25 +7,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.RequestCreator
-import model.Dishe
+import fr.isen.bernhard.androiderestaurant.model.Dishe
 import fr.isen.bernhard.androiderestaurant.R
 
 
-//Pas this et implermantation lambdea
-public class DishesAdapter(private val context: Context, var dataDishes:ArrayList<Dishe>):RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
+//Pas this et implemantation lambda
+public class DishesAdapter(var dataDishes:ArrayList<Dishe>, var addresseFunction: (Dishe) -> Unit): RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
 
         class DisheViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
                 val textView: TextView = view.findViewById(R.id.textViewPrice)
                 val textButton : Button = view.findViewById(R.id.button_select_dish)
                 val imageView: ImageView = view.findViewById(R.id.imageView)
                 val viewBaground: View = view.findViewById(R.id.viewBackground)
-
         }
-
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisheViewHolder {
 
@@ -59,6 +53,9 @@ public class DishesAdapter(private val context: Context, var dataDishes:ArrayLis
                 holder.textView.text =  dataDishes[position].disheItem.prices[0].price +" euros"
                 holder.textButton.text = dataDishes[position].disheItem.nameFr
 
+                holder.imageView.setOnClickListener {
+                        addresseFunction(dataDishes[position])
+                }
 
                 //Gestion des erreurs
                 if(dataDishes[position].disheItem.images[0] != "") {
@@ -75,12 +72,11 @@ public class DishesAdapter(private val context: Context, var dataDishes:ArrayLis
 
         }
 
-
         //Original
         //fun updateDishes(dishesFromAPI: ArrayList<String>) {
         //        dishes = dishesFromAPI  notifyDataSetChanged()
        // }
-        
+
         fun updateDishes(dishesFromAPI: ArrayList<Dishe>) {
                 dataDishes = dishesFromAPI
                 notifyDataSetChanged ()

@@ -1,4 +1,4 @@
-package model
+package fr.isen.bernhard.androiderestaurant.model
 
 import com.google.gson.annotations.SerializedName
 

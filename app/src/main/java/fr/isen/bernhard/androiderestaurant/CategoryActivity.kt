@@ -10,11 +10,9 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonParser
-import model.Dishe
+import fr.isen.bernhard.androiderestaurant.model.Dishe
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityCategoryBinding
-import model.DataSource
+import fr.isen.bernhard.androiderestaurant.model.DataSource
 import org.json.JSONObject
 
 
@@ -38,26 +36,11 @@ class CategoryActivity: AppCompatActivity() {
         //
         var dishes: ArrayList<Dishe> = arrayListOf()
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.adapter = DishesAdapter(this, dishes)
+        recyclerView.adapter = DishesAdapter(dishes,::addFunction )
 
         var adapter: DishesAdapter = (recyclerView.adapter as DishesAdapter)
         adapter.updateDishes(dishes)
         getDishesFromServer( type.toString(), adapter )
-
-       //binding.recyclerView. .apply {
-
-         //   Log.i(tag as String?, "recycledView clicked")
-            //val intent = Intent(this, DetailsActivity::class.java)
-            //intent.putExtra("category", getString(R.string.home_button3))
-            //this.startActivity(intent)
-           // println("Recylcle    !!!")
-            //println(dishes.size)
-            //println("END")
-
-
-
-       // }
-
 
     }
 
@@ -100,30 +83,14 @@ class CategoryActivity: AppCompatActivity() {
             }
         )
 
-
-
-
 // Add the request to the RequestQueue.
         queue.add(stringRequest)
-
 
        // println("THjjjjjjjjjE")
         //println(dishes.size)
        // println("END")
 
     }
-
-    //Use for  parsing
-    //fun jsonToPrettyFormat(jsonString: String?): String? {
-        //val parser = JsonParser()
-       // val json = parser.parse(jsonString).asJsonObject
-      //  val gson = GsonBuilder()
-        //    .serializeNulls()
-       //     .disableHtmlEscaping()
-       //     .setPrettyPrinting()
-       //     .create()
-     //   return gson.toJson(json)
- //   }
 
     //Titre/Photo/prix du plat
     fun fillListOfDishes(dataSource: DataSource, type:String ): ArrayList<Dishe>{
@@ -134,9 +101,6 @@ class CategoryActivity: AppCompatActivity() {
             "Entrées" -> for (currentDish in  dataSource.data[0].items) {
                 val dish : Dishe = Dishe( currentDish)
                 dishes.add(dish)
-                println("ET")
-                println(currentDish.prices)
-                println("ANDD")
             }
 
             "Plats" -> for (currentDish in  dataSource.data[1].items) {
@@ -148,12 +112,20 @@ class CategoryActivity: AppCompatActivity() {
                 val dish : Dishe = Dishe( currentDish)
                 dishes.add(dish)
             }
-
         }
-        println("TEST HOLDER")
-        println(dishes)
-        println("THE EDNEEEE")
+
     return dishes
+    }
+
+
+    fun addFunction(dishe: Dishe){
+
+        //Start activity & dishe arg
+        Log.i(tag, "ImageView clicked")
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra("item",dishe.toString())
+        this.startActivity(intent)
+
     }
 
 }
