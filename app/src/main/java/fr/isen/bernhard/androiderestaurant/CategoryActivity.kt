@@ -1,6 +1,7 @@
 package fr.isen.bernhard.androiderestaurant
 
-import adapter.DishesAdapter
+import android.content.Intent
+import fr.isen.bernhard.androiderestaurant.adapter.DishesAdapter
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -29,10 +30,34 @@ class CategoryActivity: AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
         //Recuperation category
         val type = intent?.extras?.getString("category")
 
-        getDishesFromServer( type.toString())
+//
+        //
+        var dishes: ArrayList<Dishe> = arrayListOf()
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.adapter = DishesAdapter(this, dishes)
+
+        var adapter: DishesAdapter = (recyclerView.adapter as DishesAdapter)
+        adapter.updateDishes(dishes)
+        getDishesFromServer( type.toString(), adapter )
+
+       //binding.recyclerView. .apply {
+
+         //   Log.i(tag as String?, "recycledView clicked")
+            //val intent = Intent(this, DetailsActivity::class.java)
+            //intent.putExtra("category", getString(R.string.home_button3))
+            //this.startActivity(intent)
+           // println("Recylcle    !!!")
+            //println(dishes.size)
+            //println("END")
+
+
+
+       // }
+
 
     }
 
@@ -41,13 +66,17 @@ class CategoryActivity: AppCompatActivity() {
         Log.d(tag,"$tag destroyed")
     }
 
-    fun getDishesFromServer( type: String){
+    fun getDishesFromServer( type: String, adapter: DishesAdapter){
 
-        var dishes: ArrayList<Dishe> = arrayListOf()
+        //var dishes: ArrayList<Dishe> = arrayListOf()
+        //val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        //recyclerView.adapter = DishesAdapter(this, dishes)
 
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
         val url = "http://test.api.catering.bluecodegames.com/menu"
+
+
 
         // Request a string response from the provided URL
         val body = JSONObject()
@@ -59,19 +88,20 @@ class CategoryActivity: AppCompatActivity() {
 
                 val data = Gson().fromJson(response.toString(), DataSource::class.java)
 
-                dishes = fillListOfDishes(data,type)
+                adapter.dataDishes = fillListOfDishes(data,type)
+                //dishes = dataSource.data.firstOrNull{ it.nameFr == type}?.items?.map { Dishe(it) } as ArrayList
 
-                val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-                recyclerView.adapter = DishesAdapter(this, dishes)
+                adapter.updateDishes( adapter.dataDishes )
+                //(recyclerView.adapter as DishesAdapter).updateDishes(dishes)
 
-                // Use this setting to improve performance if you know that changes
-                // in content do not change the layout size of the RecyclerView
-                recyclerView.setHasFixedSize(true)
             }, {
-                    error ->
+                    erreur ->
                 Log.e(tag, "That didn't work!")
             }
         )
+
+
+
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest)
@@ -84,22 +114,22 @@ class CategoryActivity: AppCompatActivity() {
     }
 
     //Use for  parsing
-    fun jsonToPrettyFormat(jsonString: String?): String? {
-        val parser = JsonParser()
-        val json = parser.parse(jsonString).asJsonObject
-        val gson = GsonBuilder()
-            .serializeNulls()
-            .disableHtmlEscaping()
-            .setPrettyPrinting()
-            .create()
-        return gson.toJson(json)
-    }
+    //fun jsonToPrettyFormat(jsonString: String?): String? {
+        //val parser = JsonParser()
+       // val json = parser.parse(jsonString).asJsonObject
+      //  val gson = GsonBuilder()
+        //    .serializeNulls()
+       //     .disableHtmlEscaping()
+       //     .setPrettyPrinting()
+       //     .create()
+     //   return gson.toJson(json)
+ //   }
 
     //Titre/Photo/prix du plat
     fun fillListOfDishes(dataSource: DataSource, type:String ): ArrayList<Dishe>{
 
-        val dishes: ArrayList<Dishe> = arrayListOf()
-
+        var dishes: ArrayList<Dishe> = arrayListOf()
+//dishes = dataSource.data.firstOrNull{ it.nameFr == type}?.items?.map { Dishe(it) } as ArrayList
         when (type){
             "Entrées" -> for (currentDish in  dataSource.data[0].items) {
                 val dish : Dishe = Dishe( currentDish)
