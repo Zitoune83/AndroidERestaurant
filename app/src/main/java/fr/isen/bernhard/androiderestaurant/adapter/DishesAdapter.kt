@@ -59,20 +59,19 @@ public class DishesAdapter(private val context: Context, var dataDishes:ArrayLis
                 holder.textView.text =  dataDishes[position].disheItem.prices[0].price +" euros"
                 holder.textButton.text = dataDishes[position].disheItem.nameFr
 
+
+                //Gestion des erreurs
                 if(dataDishes[position].disheItem.images[0] != "") {
-                        Picasso.get().load(dataDishes[position].disheItem.images[0]).fit()
-                                .centerCrop().into(holder.imageView )
+
+                       Picasso.get().load(dataDishes[position].disheItem.images[0]).fit().error(R.drawable.nopreviewavalaible)
+                                .centerCrop().into(holder.imageView)
 
                 }
                 else{
-                        Picasso.get().load(R.drawable.nopreviewavalaible).fit()
+                       Picasso.get().load(R.drawable.nopreviewavalaible).fit()
                                 .centerCrop().into(holder.imageView )
+
                 }
-
-                //println("THjjjjjjjjjE")
-                //println(dataDishes[position].disheItem.images[0])
-                //println("END")
-
 
         }
 
@@ -81,13 +80,9 @@ public class DishesAdapter(private val context: Context, var dataDishes:ArrayLis
         //fun updateDishes(dishesFromAPI: ArrayList<String>) {
         //        dishes = dishesFromAPI  notifyDataSetChanged()
        // }
-
-
+        
         fun updateDishes(dishesFromAPI: ArrayList<Dishe>) {
                 dataDishes = dishesFromAPI
                 notifyDataSetChanged ()
         }
-
-
-
 }
