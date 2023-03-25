@@ -9,4 +9,6 @@
     <string name="buttonLess">-</string>
     <string name="buttonMore">+</string>
     <string name="button_total">TOTAL</string>
+    <string name="button_recycler_view_dish">Button</string>
+    <string name="text_view_price">TextView</string>
 </resources>

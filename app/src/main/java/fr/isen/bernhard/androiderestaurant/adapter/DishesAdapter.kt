@@ -17,17 +17,19 @@ import fr.isen.bernhard.androiderestaurant.R
 public class DishesAdapter(var dataDishes:ArrayList<Dishe>, var addressFunction: (Dishe) -> Unit): RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
 
         class DisheViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-                val textView: TextView = view.findViewById(R.id.textViewPrice)
-                val textButton : Button = view.findViewById(R.id.button_select_dish)
-                val imageView: ImageView = view.findViewById(R.id.imageView)
-                val viewBaground: View = view.findViewById(R.id.viewBackground)
+                val textView: TextView = view.findViewById(R.id.text_view_price)
+                //val textButton : Button = view.findViewById(R.id.button_select_dish)
+                val textView2 : TextView = view.findViewById(R.id.text_view_title)
+                val imageView: ImageView = view.findViewById(R.id.image_view)
+                //val viewBaground: View = view.findViewById(R.id.viewBackground)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisheViewHolder {
 
                 // create a new view
                 val adapterLayout = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.dishe, parent, false)
+                        //.inflate(R.layout.dishe, parent, false)
+                        .inflate(R.layout.recycler_view_dish, parent, false)
 
                 return DisheViewHolder(adapterLayout)
         }
@@ -45,13 +47,17 @@ public class DishesAdapter(var dataDishes:ArrayList<Dishe>, var addressFunction:
                 //holder.textView.text = context.resources.getString(Dishe)
                 //val dishe = dataDishes
                 //holder.textView.text =  context.resources.getString(dishe.??)
-                if (position%2 == 0)
-                holder.viewBaground.setBackgroundColor(color1)
-                else
-                        holder.viewBaground.setBackgroundColor(color2)
+               // if (position%2 == 0)
+                //holder.viewBaground.setBackgroundColor(color1)
+                //else
+                //        holder.viewBaground.setBackgroundColor(color2)
 
-                holder.textView.text =  dataDishes[position].disheItem.prices[0].price +" euros"
-                holder.textButton.text = dataDishes[position].disheItem.nameFr
+
+                var msg = dataDishes[position].disheItem.prices[0].price
+                msg = msg+" €"
+
+                holder.textView.text = msg
+                holder.textView2.text = dataDishes[position].disheItem.nameFr
 
                 holder.imageView.setOnClickListener {
                         addressFunction(dataDishes[position])
