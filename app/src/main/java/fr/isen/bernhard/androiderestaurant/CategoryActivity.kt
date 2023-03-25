@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import fr.isen.bernhard.androiderestaurant.model.Dishe
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityCategoryBinding
 import fr.isen.bernhard.androiderestaurant.model.DataSource
+import fr.isen.bernhard.androiderestaurant.model.Items
 import org.json.JSONObject
 
 
@@ -32,10 +33,11 @@ class CategoryActivity: AppCompatActivity() {
         //Recuperation category
         val type = intent?.extras?.getString("category")
 
-//
-        //
+        //Init
         var dishes: ArrayList<Dishe> = arrayListOf()
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+            //Reservation de la memoire necessaire à l' execution de la fonction "addFunction"
+            //Réalisation de celle-ci, depend de la ou on l' a implementé: ici dans DishesAdapter
         recyclerView.adapter = DishesAdapter(dishes,::addFunction )
 
         var adapter: DishesAdapter = (recyclerView.adapter as DishesAdapter)
@@ -123,7 +125,7 @@ class CategoryActivity: AppCompatActivity() {
         //Start activity & dishe arg
         Log.i(tag, "ImageView clicked")
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra("item",dishe.toString())
+        intent.putExtra("item",dishe.disheItem.toString())
         this.startActivity(intent)
 
     }

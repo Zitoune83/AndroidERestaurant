@@ -3,4 +3,10 @@
     <string name="home_button1">Entrées</string>
     <string name="home_button2">Plats</string>
     <string name="home_button3">Desserts</string>
+    <string name="ingredients_dishe">Les ingrédients</string>
+    <string name="title_dishe">Nom du plat</string>
+    <string name="quantity">TextView</string>
+    <string name="buttonLess">-</string>
+    <string name="buttonMore">+</string>
+    <string name="button_total">TOTAL</string>
 </resources>

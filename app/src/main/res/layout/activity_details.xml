@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="409dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/titleDishe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TOTO"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="326dp" />
+        android:layout_marginTop="16dp"
+        android:text="@string/title_dishe"
+        app:layout_constraintEnd_toEndOf="@+id/pager"
+        app:layout_constraintStart_toStartOf="@+id/pager"
+        app:layout_constraintTop_toBottomOf="@+id/pager" />
+
+    <TextView
+        android:id="@+id/ingredientsDishe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/ingredients_dishe"
+        app:layout_constraintEnd_toEndOf="@+id/titleDishe"
+        app:layout_constraintStart_toStartOf="@+id/titleDishe"
+        app:layout_constraintTop_toBottomOf="@+id/titleDishe" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/quantity"
+        app:layout_constraintEnd_toEndOf="@+id/ingredientsDishe"
+        app:layout_constraintStart_toStartOf="@+id/ingredientsDishe"
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsDishe" />
+
+    <Button
+        android:id="@+id/button_less"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="@string/buttonLess"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/quantity"
+        app:layout_constraintEnd_toStartOf="@+id/quantity"
+        app:layout_constraintTop_toTopOf="@+id/quantity" />
+
+    <Button
+        android:id="@+id/button_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/buttonMore"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/quantity"
+        app:layout_constraintStart_toEndOf="@+id/quantity"
+        app:layout_constraintTop_toTopOf="@+id/quantity" />
+
+    <Button
+        android:id="@+id/button_total"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/button_total"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="VisualLintButtonSize" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

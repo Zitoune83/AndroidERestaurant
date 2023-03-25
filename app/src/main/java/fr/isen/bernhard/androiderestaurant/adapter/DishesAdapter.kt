@@ -14,7 +14,7 @@ import fr.isen.bernhard.androiderestaurant.R
 
 
 //Pas this et implemantation lambda
-public class DishesAdapter(var dataDishes:ArrayList<Dishe>, var addresseFunction: (Dishe) -> Unit): RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
+public class DishesAdapter(var dataDishes:ArrayList<Dishe>, var addressFunction: (Dishe) -> Unit): RecyclerView.Adapter<DishesAdapter.DisheViewHolder>() {
 
         class DisheViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
                 val textView: TextView = view.findViewById(R.id.textViewPrice)
@@ -54,7 +54,7 @@ public class DishesAdapter(var dataDishes:ArrayList<Dishe>, var addresseFunction
                 holder.textButton.text = dataDishes[position].disheItem.nameFr
 
                 holder.imageView.setOnClickListener {
-                        addresseFunction(dataDishes[position])
+                        addressFunction(dataDishes[position])
                 }
 
                 //Gestion des erreurs
