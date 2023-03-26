@@ -6,19 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import fr.isen.bernhard.androiderestaurant.adapter.DishesAdapter
-import fr.isen.bernhard.androiderestaurant.adapter.PagerAdapter
-import fr.isen.bernhard.androiderestaurant.databinding.ActivityCategoryBinding
+import fr.isen.bernhard.androiderestaurant.adapter.ViewPagerAdapter
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityDetailsBinding
-import fr.isen.bernhard.androiderestaurant.databinding.ActivityHomeBinding
-import fr.isen.bernhard.androiderestaurant.model.Dishe
 import fr.isen.bernhard.androiderestaurant.model.DisheDeserialized
-import java.io.File.separator
 
-class DetailsActivity(): AppCompatActivity() {
+class DetailsActivity(): FragmentActivity() {
 
     private val tag = "DetailsActivity"
     private lateinit var binding: ActivityDetailsBinding
@@ -28,12 +24,27 @@ class DetailsActivity(): AppCompatActivity() {
 
 
 
+
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+            var viewPager2: ViewPager2 = binding.pager
+            var obtest:ArrayList<ViewPagerItem> = ArrayList()
+
+            var current: ViewPagerItem= ViewPagerItem()
+
+            obtest.add(current)
+            obtest.add(current)
+            obtest.add(current)
+            obtest.add(current)
+
+            var adapterPager: ViewPagerAdapter = ViewPagerAdapter(obtest)
+
+            viewPager2.adapter = adapterPager
 
 
         var dish: DisheDeserialized = DisheDeserialized()
@@ -124,7 +135,9 @@ class DetailsActivity(): AppCompatActivity() {
         binding.quantity.text = quantity.toString()
     }
 
-
+    companion object {
+        private const val ARG_OBJECT = "object"
+    }
 
 
 }
