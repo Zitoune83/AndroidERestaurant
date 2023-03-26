@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_orange_light">
+    android:background="@android:color/holo_orange_dark">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="13dp">
 
         <ImageView
             android:id="@+id/right_icon"
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
-            android:text="My Application"
+            android:text="Little E-dian"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/right_icon"
             android:layout_marginEnd="8dp"
-            android:text="1"
+            android:text="@string/number_article"
             android:textColor="#1565C0"
             android:textStyle="bold" />
 

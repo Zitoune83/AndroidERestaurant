@@ -1,9 +1,16 @@
 package fr.isen.bernhard.androiderestaurant
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import fr.isen.bernhard.androiderestaurant.adapter.DishesAdapter
+import fr.isen.bernhard.androiderestaurant.adapter.PagerAdapter
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityCategoryBinding
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityDetailsBinding
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityHomeBinding
@@ -11,21 +18,23 @@ import fr.isen.bernhard.androiderestaurant.model.Dishe
 import fr.isen.bernhard.androiderestaurant.model.DisheDeserialized
 import java.io.File.separator
 
-class DetailsActivity: AppCompatActivity() {
+class DetailsActivity(): AppCompatActivity() {
 
     private val tag = "DetailsActivity"
     private lateinit var binding: ActivityDetailsBinding
     private var quantity = 0;
     private var totalPrice = 0.0
+    lateinit var textView: TextView
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
 
         var dish: DisheDeserialized = DisheDeserialized()
 
@@ -34,17 +43,12 @@ class DetailsActivity: AppCompatActivity() {
 
         dish = deserializeDisheFlatten(dishFlatten.toString())
 
-
-
     //Passer une liste d' URL pour le pagerView2
 
-        //Affiche le titre
-        binding.titleDishe.text = dish.nameFr.toString()
-        //Afficher liste des ingredient
-        binding.ingredientsDishe.text = dish.listIngredients.toString()
-        //Bouton selecteur
-        binding.quantity.text = quantity.toString()
 
+        binding.titleDishe.text = dish.nameFr.toString()
+        binding.ingredientsDishe.text = dish.listIngredients.toString()
+        binding.quantity.text = quantity.toString()
 
         binding.buttonLess.setOnClickListener {
             if (quantity>0){
@@ -60,9 +64,23 @@ class DetailsActivity: AppCompatActivity() {
             updateTotalPrice(dish.prices.toDouble())
         }
 
+        binding.buttonTotal.setOnClickListener {
+            Toast.makeText(this, "faite chauffrer la carte!!", Toast.LENGTH_SHORT).show()
+            textView = view.findViewById(R.id.number_article)
+            textView.text = quantity.toString()
+
+
+
+
+
+
+        }
+
 
 
     }
+
+
 
     fun deserializeDisheFlatten(string: String): DisheDeserialized{
         val current: DisheDeserialized = DisheDeserialized()
@@ -99,7 +117,7 @@ class DetailsActivity: AppCompatActivity() {
 
     fun updateTotalPrice(price: Double){
         totalPrice = quantity*price
-        binding.buttonTotal.text = totalPrice.toString()
+        binding.buttonTotal.text = totalPrice.toString() +" euros"
     }
 
     fun updateQuantity(){

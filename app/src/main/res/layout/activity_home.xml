@@ -18,8 +18,10 @@
         android:id="@+id/homeButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="130dp"
+        android:fontFamily="casual"
         android:text="@string/home_button1"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include2" />
@@ -28,8 +30,10 @@
         android:id="@+id/homeButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="70dp"
+        android:fontFamily="casual"
         android:text="@string/home_button2"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/homeButton1"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="@+id/homeButton1"
@@ -39,12 +43,27 @@
         android:id="@+id/homeButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="70dp"
+        android:fontFamily="casual"
         android:text="@string/home_button3"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/homeButton2"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="@+id/homeButton2"
         app:layout_constraintTop_toBottomOf="@+id/homeButton2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/litte_e_dian" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

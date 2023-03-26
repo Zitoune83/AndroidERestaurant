@@ -20,7 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/title_dishe"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/pager"
         app:layout_constraintStart_toStartOf="@+id/pager"
         app:layout_constraintTop_toBottomOf="@+id/pager" />
@@ -30,7 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="cursive"
         android:text="@string/ingredients_dishe"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleDishe"
         app:layout_constraintStart_toStartOf="@+id/titleDishe"
         app:layout_constraintTop_toBottomOf="@+id/titleDishe" />

@@ -11,4 +11,5 @@
     <string name="button_total">TOTAL</string>
     <string name="button_recycler_view_dish">Button</string>
     <string name="text_view_price">TextView</string>
+    <string name="number_article">0</string>
 </resources>

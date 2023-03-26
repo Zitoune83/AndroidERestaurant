@@ -1,10 +1,15 @@
 package fr.isen.bernhard.androiderestaurant
 
+
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityHomeBinding
+
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -17,6 +22,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
 
         binding.homeButton1.setOnClickListener {
             Log.i(tag, "button1 clicked")
@@ -44,9 +51,14 @@ class HomeActivity : AppCompatActivity() {
 
 
     }
-
      override fun onDestroy() {
          super.onDestroy()
          Log.d(tag,"$tag destroyed")
     }
+
+    fun updateNumberArticle(){
+
+    }
+
+
 }

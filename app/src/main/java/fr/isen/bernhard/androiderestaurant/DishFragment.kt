@@ -1,27 +1,22 @@
-package fr.isen.bernhard.androiderestaurant.adapter
+package fr.isen.bernhard.androiderestaurant
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import fr.isen.bernhard.androiderestaurant.R
 
-const val ARG_OBJECT = "object"
+private const val ARG_OBJECT = "object"
 
-// Instances of this class are fragments representing a single
-// object in our collection.
-class DisheFragment: Fragment() {
-
+class DishFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.dishe_fragment, container, false)
+        return inflater.inflate(R.layout.fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,4 +27,3 @@ class DisheFragment: Fragment() {
     }
 
 }
-
