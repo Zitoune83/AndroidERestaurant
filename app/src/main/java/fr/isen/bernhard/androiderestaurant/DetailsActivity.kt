@@ -15,6 +15,9 @@ class DetailsActivity: AppCompatActivity() {
 
     private val tag = "DetailsActivity"
     private lateinit var binding: ActivityDetailsBinding
+    private var quantity = 0;
+    private var totalPrice = 0.0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,23 +27,38 @@ class DetailsActivity: AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        var dishe: DisheDeserialized = DisheDeserialized()
+        var dish: DisheDeserialized = DisheDeserialized()
 
         //Recuperation category
-        val disheFlatten = intent?.extras?.getString("item")
+        val dishFlatten = intent?.extras?.getString("item")
 
-        dishe = deserializeDisheFlatten(disheFlatten.toString())
+        dish = deserializeDisheFlatten(dishFlatten.toString())
 
 
 
     //Passer une liste d' URL pour le pagerView2
 
         //Affiche le titre
-        binding.titleDishe.text = dishe.nameFr.toString()
+        binding.titleDishe.text = dish.nameFr.toString()
         //Afficher liste des ingredient
-        binding.ingredientsDishe.text = dishe.listIngredients.toString()
+        binding.ingredientsDishe.text = dish.listIngredients.toString()
         //Bouton selecteur
+        binding.quantity.text = quantity.toString()
 
+
+        binding.buttonLess.setOnClickListener {
+            if (quantity>0){
+                quantity--
+                updateQuantity()
+                updateTotalPrice(dish.prices.toDouble())
+            }
+        }
+
+        binding.buttonMore.setOnClickListener {
+            quantity++
+            updateQuantity()
+            updateTotalPrice(dish.prices.toDouble())
+        }
 
 
 
@@ -79,6 +97,14 @@ class DetailsActivity: AppCompatActivity() {
     }
 
 
+    fun updateTotalPrice(price: Double){
+        totalPrice = quantity*price
+        binding.buttonTotal.text = totalPrice.toString()
+    }
+
+    fun updateQuantity(){
+        binding.quantity.text = quantity.toString()
+    }
 
 
 
