@@ -8,13 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import fr.isen.bernhard.androiderestaurant.R
 import fr.isen.bernhard.androiderestaurant.ViewPagerItem
 
 class ViewPagerAdapter (private var listItem: ArrayList<ViewPagerItem> = ArrayList()): RecyclerView.Adapter<ViewPagerAdapter.ViewPagerHolder>() {
 
     class ViewPagerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textView: TextView = itemView.findViewById(R.id.title_dish)
+        //var textView: TextView = itemView.findViewById(R.id.title_dish)
         var imageView: ImageView = itemView.findViewById((R.id.image_dish))
     }
 
@@ -31,9 +32,16 @@ class ViewPagerAdapter (private var listItem: ArrayList<ViewPagerItem> = ArrayLi
 
         var viewPagerItem: ViewPagerItem = listItem.get(position)
 
-        holder.textView.text = "TOTO" +position
 
+        if (listItem[position].listURL != "") {
+
+            Picasso.get().load(listItem[position].listURL).error(R.drawable.nopreviewavalaible)
+                .into(holder.imageView)
+
+        } else {
+            Picasso.get().load(R.drawable.nopreviewavalaible)
+                .into(holder.imageView)
+        }
     }
-
 
 }

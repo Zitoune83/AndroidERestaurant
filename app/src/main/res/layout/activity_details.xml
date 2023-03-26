@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/orange11">
 
     <include
         android:id="@+id/include"
@@ -15,7 +16,8 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
+        android:background="@color/orange1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,10 +27,11 @@
         android:id="@+id/titleDishe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="8dp"
+        android:fontFamily="cursive"
         android:text="@string/title_dishe"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/pager"
         app:layout_constraintStart_toStartOf="@+id/pager"
         app:layout_constraintTop_toBottomOf="@+id/pager" />
@@ -49,7 +52,7 @@
         android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="@string/quantity"
         app:layout_constraintEnd_toEndOf="@+id/ingredientsDishe"
         app:layout_constraintStart_toStartOf="@+id/ingredientsDishe"
@@ -60,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
+        android:background="@color/orange1"
         android:text="@string/buttonLess"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -72,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:background="@color/orange1"
         android:text="@string/buttonMore"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -85,6 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:background="@color/orange1"
         android:text="@string/button_total"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

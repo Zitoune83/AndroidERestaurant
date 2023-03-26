@@ -25,38 +25,34 @@ class DetailsActivity(): FragmentActivity() {
 
 
 
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Init binding
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         val view = binding.root
+        //Init pagerView
+        var viewPager2: ViewPager2 = binding.pager
+        var listPagerItem:ArrayList<ViewPagerItem> = ArrayList()
+
         setContentView(view)
 
-            var viewPager2: ViewPager2 = binding.pager
-            var obtest:ArrayList<ViewPagerItem> = ArrayList()
-
-            var current: ViewPagerItem= ViewPagerItem()
-
-            obtest.add(current)
-            obtest.add(current)
-            obtest.add(current)
-            obtest.add(current)
-
-            var adapterPager: ViewPagerAdapter = ViewPagerAdapter(obtest)
-
-            viewPager2.adapter = adapterPager
-
-
-        var dish: DisheDeserialized = DisheDeserialized()
-
-        //Recuperation category
+        //Recuperation de la données sérialisées
         val dishFlatten = intent?.extras?.getString("item")
 
+        //Déserialise les données
+        var dish: DisheDeserialized = DisheDeserialized()
         dish = deserializeDisheFlatten(dishFlatten.toString())
 
-    //Passer une liste d' URL pour le pagerView2
+        //Generale la liste des items pour le pagerView
+        listPagerItem = initListURL(dish.listURL)
+
+        //Init et init pagerView
+        var adapterPager: ViewPagerAdapter = ViewPagerAdapter(listPagerItem)
+        viewPager2.adapter = adapterPager
 
 
+        //Affichage Details Activity
         binding.titleDishe.text = dish.nameFr.toString()
         binding.ingredientsDishe.text = dish.listIngredients.toString()
         binding.quantity.text = quantity.toString()
@@ -81,13 +77,7 @@ class DetailsActivity(): FragmentActivity() {
             textView.text = quantity.toString()
 
 
-
-
-
-
         }
-
-
 
     }
 
@@ -102,6 +92,9 @@ class DetailsActivity(): FragmentActivity() {
 
         for (i in list){
 
+            //println("DEB")
+            //println(i)
+            //println("FIN")
             if(i.contains("nameFr") && ind ==0) {
                 current.nameFr = i.substringAfter("=")
                 ind++
@@ -115,11 +108,18 @@ class DetailsActivity(): FragmentActivity() {
             if(i.contains("price=")) {
                 current.prices = i.substringAfter("=").toDouble()
             }
+            if(i.contains("images=")) {
+                current.listURL.add(i.substringAfter("["))
+            }
+            else if(i.contains("http")) {
+                current.listURL.add(i.substringBefore(']'))
+            }
         }
-        println("TEST")
-        println(current.nameFr)
-        println(current.listIngredients)
-        println(current.prices)
+        //println("TEST")
+        //println(current.nameFr)
+        //println(current.listIngredients)
+        //println(current.prices)
+        //println(current.listURL)
 
         return current
 
@@ -135,9 +135,25 @@ class DetailsActivity(): FragmentActivity() {
         binding.quantity.text = quantity.toString()
     }
 
-    companion object {
-        private const val ARG_OBJECT = "object"
+
+    fun initListURL(list:ArrayList<String>): ArrayList<ViewPagerItem>{
+
+        var listItem: ArrayList<ViewPagerItem> = ArrayList()
+
+        //println("DEB")
+
+        for(i in list){
+
+            var current: ViewPagerItem = ViewPagerItem()
+            var string:String = i.substringAfter(" ")
+            string = string.substringBefore(']')
+
+            current.listURL = string
+            listItem.add(current)
+        }
+
+        //println("FIN")
+        return listItem
+
     }
-
-
 }
