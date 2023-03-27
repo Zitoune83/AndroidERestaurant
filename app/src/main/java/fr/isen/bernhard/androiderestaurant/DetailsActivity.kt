@@ -1,18 +1,18 @@
 package fr.isen.bernhard.androiderestaurant
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import fr.isen.bernhard.androiderestaurant.adapter.ViewPagerAdapter
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityDetailsBinding
 import fr.isen.bernhard.androiderestaurant.model.DisheDeserialized
+import java.io.*
+import fr.isen.bernhard.androiderestaurant.rss.*
+
 
 class DetailsActivity(): FragmentActivity() {
 
@@ -21,6 +21,9 @@ class DetailsActivity(): FragmentActivity() {
     private var quantity = 0;
     private var totalPrice = 0.0
     lateinit var textView: TextView
+
+    private val simpleFileName: String = "note.txt"
+    private val simpleFileName2: String = "note2.txt"
 
 
 
@@ -34,6 +37,10 @@ class DetailsActivity(): FragmentActivity() {
         //Init pagerView
         var viewPager2: ViewPager2 = binding.pager
         var listPagerItem:ArrayList<ViewPagerItem> = ArrayList()
+
+        textView = view.findViewById(R.id.number_article)
+
+        updateShopping(textView)
 
         setContentView(view)
 
@@ -72,11 +79,9 @@ class DetailsActivity(): FragmentActivity() {
         }
 
         binding.buttonTotal.setOnClickListener {
-            Toast.makeText(this, "faite chauffrer la carte!!", Toast.LENGTH_SHORT).show()
-            textView = view.findViewById(R.id.number_article)
-            textView.text = quantity.toString()
-
-
+            Toast.makeText(this, "faite chauffer la carte!!", Toast.LENGTH_SHORT).show()
+            writeToFile(quantity.toString(),this)
+            updateShopping(textView)
         }
 
     }
@@ -92,18 +97,13 @@ class DetailsActivity(): FragmentActivity() {
 
         for (i in list){
 
-            //println("DEB")
-            //println(i)
-            //println("FIN")
             if(i.contains("nameFr") && ind ==0) {
                 current.nameFr = i.substringAfter("=")
                 ind++
             }
-
             else if(i.contains("nameFr") && ind !=0) {
                 current.listIngredients.add(i.substringAfter("="))
             }
-
 
             if(i.contains("price=")) {
                 current.prices = i.substringAfter("=").toDouble()
@@ -155,5 +155,11 @@ class DetailsActivity(): FragmentActivity() {
         //println("FIN")
         return listItem
 
+    }
+
+
+fun updateShopping(txt:TextView){
+        val string: String? = readFromFile(this)
+        txt.text = string
     }
 }

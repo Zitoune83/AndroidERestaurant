@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/right_icon"
             android:layout_marginEnd="8dp"
-            android:text="@string/number_article"
             android:textColor="#1565C0"
             android:textStyle="bold" />
 

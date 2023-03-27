@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityHomeBinding
-
+import fr.isen.bernhard.androiderestaurant.rss.*
+import java.io.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -59,6 +61,10 @@ class HomeActivity : AppCompatActivity() {
     fun updateNumberArticle(){
 
     }
-
-
+    override fun onResume() {
+        super.onResume()
+        val string: String? = readFromFile(this)
+        var textView : TextView  = this.findViewById(R.id.number_article)
+        textView.text = string
+    }
 }
