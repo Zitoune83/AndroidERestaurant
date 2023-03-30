@@ -4,6 +4,8 @@ import android.content.Intent
 import fr.isen.bernhard.androiderestaurant.adapter.DishesAdapter
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -35,12 +37,10 @@ class CategoryActivity: AppCompatActivity() {
 
         //Init
         var dishes: ArrayList<Dishe> = arrayListOf()
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
             //Reservation de la memoire necessaire à l' execution de la fonction "addFunction"
             //Réalisation de celle-ci, depend de la ou on l' a implementé: ici dans DishesAdapter
-        recyclerView.adapter = DishesAdapter(dishes,::addFunction )
-
-        var adapter: DishesAdapter = (recyclerView.adapter as DishesAdapter)
+        binding.recyclerView.adapter = DishesAdapter(dishes,::addFunction )
+        var adapter: DishesAdapter = binding.recyclerView.adapter as DishesAdapter
         adapter.updateDishes(dishes)
         getDishesFromServer( type.toString(), adapter )
 
@@ -53,15 +53,9 @@ class CategoryActivity: AppCompatActivity() {
 
     fun getDishesFromServer( type: String, adapter: DishesAdapter){
 
-        //var dishes: ArrayList<Dishe> = arrayListOf()
-        //val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        //recyclerView.adapter = DishesAdapter(this, dishes)
-
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
         val url = "http://test.api.catering.bluecodegames.com/menu"
-
-
 
         // Request a string response from the provided URL
         val body = JSONObject()
@@ -87,10 +81,6 @@ class CategoryActivity: AppCompatActivity() {
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest)
-
-       // println("THjjjjjjjjjE")
-        //println(dishes.size)
-       // println("END")
 
     }
 

@@ -25,6 +25,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".ShoppingActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".HomeActivity"
             android:exported="true">
 

@@ -1,14 +1,18 @@
 package fr.isen.bernhard.androiderestaurant
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import fr.isen.bernhard.androiderestaurant.adapter.ViewPagerAdapter
 import fr.isen.bernhard.androiderestaurant.databinding.ActivityDetailsBinding
+import fr.isen.bernhard.androiderestaurant.model.Dishe
 import fr.isen.bernhard.androiderestaurant.model.DisheDeserialized
 import java.io.*
 import fr.isen.bernhard.androiderestaurant.rss.*
@@ -21,12 +25,6 @@ class DetailsActivity(): FragmentActivity() {
     private var quantity = 0;
     private var totalPrice = 0.0
     lateinit var textView: TextView
-
-    private val simpleFileName: String = "note.txt"
-    private val simpleFileName2: String = "note2.txt"
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,13 +78,21 @@ class DetailsActivity(): FragmentActivity() {
 
         binding.buttonTotal.setOnClickListener {
             Toast.makeText(this, "faite chauffer la carte!!", Toast.LENGTH_SHORT).show()
-            writeToFile(quantity.toString(),this)
+            var line = generateLine(dish, quantity)
+            writeToFile(line,this)
             updateShopping(textView)
         }
 
+        val shoppingButton : View = findViewById(R.id.right_icon)
+        shoppingButton.setOnClickListener{
+            Toast.makeText(this, "shopping time!!", Toast.LENGTH_SHORT).show()
+
+            Log.i(tag, "button shop clicked")
+            val intent = Intent(this, ShoppingActivity::class.java)
+            this.startActivity(intent)
+        }
+
     }
-
-
 
     fun deserializeDisheFlatten(string: String): DisheDeserialized{
         val current: DisheDeserialized = DisheDeserialized()
@@ -158,8 +164,14 @@ class DetailsActivity(): FragmentActivity() {
     }
 
 
-fun updateShopping(txt:TextView){
-        val string: String? = readFromFile(this)
-        txt.text = string
+    fun updateShopping(txt:TextView){
+        val quantity: Int = readFromFile(this)
+        txt.text = quantity.toString()
     }
+
+    //NAME=xxx;PRICE=;QUANTITY=
+
+
+
+
 }
