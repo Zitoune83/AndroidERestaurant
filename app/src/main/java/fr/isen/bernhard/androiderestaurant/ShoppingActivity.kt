@@ -92,6 +92,7 @@ class ShoppingActivity: AppCompatActivity(){
                     binding.qty10.text = "(x$text2)"
                     total10 = price * text2.toInt()
                 }
+
                 else -> Log.e(tag, "Error")
 
             }
